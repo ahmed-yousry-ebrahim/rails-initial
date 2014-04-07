@@ -1,0 +1,33 @@
+<h1><%= t("admin.manage_users")%></h1>
+
+<table>
+	<thead>
+		<tr>
+			<th width="200"><%=t("admin.users.full_name")%></th>
+			<th width="100"><%=t("admin.users.phone")%></th>
+			<th width="200"><%=t("admin.users.email")%></th>
+			<th><%=t("admin.users.department")%></th>
+			<th></th>
+			
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @users.each do |user| %>
+		<%unless user.id == current_user.id%>
+		<tr>
+			<td><%= user.full_name %></td>
+			<td><%= user.phone %></td>
+			<td><%= user.email %></td>
+			<td><%= t("departments."+user.department.name) %></td>
+			<td><%= link_to t("common.edit"), edit_user_path(user) %></td>
+			
+		</tr>
+		<%end%>
+		<% end %>
+	</tbody>
+</table>
+
+<br>
+
+<%= link_to t("admin.users.new"), new_user_path %>

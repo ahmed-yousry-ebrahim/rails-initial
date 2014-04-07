@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%= render partial: 'layouts/head' %>
+  <body>
+  	<%= render partial: 'layouts/header' %>
+    <div class="content contentWrapper">
+      <%= render partial: 'layouts/flash' %>
+      <% unless current_user.blank? %>
+        <div class="mainContent">
+          <div class="row">
+              <%= yield %>
+            
+          </div>
+        </div>
+      <% else %>
+          <%= yield %>
+      <% end %>
+      <div class="row"></div>
+    </div>
+
+
+    <%= render partial: 'layouts/footer' %>
+
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

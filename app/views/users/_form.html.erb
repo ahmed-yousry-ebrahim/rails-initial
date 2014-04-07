@@ -1,0 +1,55 @@
+<%= form_for(@user, :html => {:data => {:abide => ''}}) do |f| %>
+<% if @user.errors.any? %>
+<div id="error_explanation">
+	
+	<ul>
+		<% @user.errors.full_messages.each do |msg| %>
+		<li>
+			<%= msg %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+<div class="field">
+	<%= f.label :username, t("admin.users.username") %>
+	<br>
+	<%= f.text_field :username , :required => ''  %>
+	<small class="error"><%=t("common.errors.required")%></small>
+</div>
+
+<div class="field">
+	<%= f.label :full_name, t("admin.users.full_name") %>
+	<br>
+	<%= f.text_field :full_name , :required => ''  %>
+	<small class="error"><%=t("common.errors.required")%></small>
+</div>
+
+<div class="field">
+	<%= f.label :email, t("admin.users.email") %>
+	<br>
+	<%= f.email_field :email, :pattern => "email" %>
+	<small class="error"><%=t("common.errors.pattern")%></small>
+</div>
+
+<div class="field">
+	<%= f.label :phone, t("admin.users.phone") %>
+	<br>
+	<%= f.text_field :phone %>
+</div>
+
+<div class="field">
+	<%= f.label :role_id, t("admin.users.role") %>
+	<br>
+	<%= f.select :role_id, options_from_collection_for_select(Role.all, "id", "translated",@user.role_id) %>
+</div>
+
+<div class="field">
+	<%= f.label :department_id, t("admin.users.department") %>
+	<br>
+	<%= f.select :department_id, options_from_collection_for_select(Department.all, "id", "translated",@user.department_id) %>
+</div>
+<div class="actions">
+	<%= f.submit t("admin.users.save"), :class => "tiny button left" %>
+</div>
+<% end %>
